@@ -25,8 +25,8 @@ let questions = questions_ner;
         }
 
         function startQuiz() {
-            document.getElementById('startPage').style.display = 'none';
-            document.getElementById('quizContainer').style.display = 'block';
+            // document.getElementById('startPage').style.display = 'none';
+            // document.getElementById('quizContainer').style.display = 'block';
             displayQuestion();
         }
 
@@ -92,4 +92,4 @@ let questions = questions_ner;
             document.getElementById('feedback').style.display = 'none'; // Hide feedback on the last question
         }   
 
-        startQuiz()
+        startQuiz();
