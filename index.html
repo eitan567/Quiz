@@ -4,16 +4,13 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>תפריט בחינות לתלמיד</title>
-        <!-- <script type="text/javascript" src="./questions.js"></script>
-        <script type="text/javascript" src="./logic.js"></script>
-        <link rel="stylesheet" href="./style.css" media="all"> -->
         <style>
             body {
                 font-family: Assistant, sans-serif;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                height: 100vh;
+                min-height: 100vh;
                 margin: 0 auto;
                 background-color: #1d1d1d;
                 color:#ffffff;
@@ -32,7 +29,6 @@
                 background-color: #505e2e;
                 border: 1px solid #eeeeee;
                 border-radius: 15px;
-                /* opacity: 0.7; */
                 padding: 33px;
                 margin: 34px;
                 text-align: center;
@@ -45,12 +41,33 @@
                 height: 64px;
                 display: flex;
                 align-items: center;
-                align-content: center;
                 justify-content: center;
                 font-size: 23px;
             }
             .menu-item:hover {
                 transform: translateY(-5px);
+            }
+            
+            @media (max-width: 480px) {
+                body {
+                    align-items: flex-start;
+                    padding-top: 20px;
+                }
+                #startPage h1 {
+                    font-size: 32px;
+                }
+                .menu-grid {
+                    grid-template-columns: 1fr;
+                    gap: 20px;
+                }
+                .menu-item {
+                    width: 80%;
+                    max-width: 250px;
+                    margin: 10px auto;
+                    height: 50px;
+                    font-size: 18px;
+                    padding: 15px;
+                }
             }
         </style>
     </head>
@@ -59,7 +76,7 @@
             <h1 style="font-size: 45px;">תפריט בחינות לתלמיד</h1>
             <div class="menu-grid">
                 <a href="quiz.html" class="menu-item">מבחן תבניתי</a>
-                <a href="quiz-ner.html".html" class="menu-item">NER</a>
+                <a href="quiz-ner.html" class="menu-item">NER</a>
                 <a href="quiz-qpcr.html" class="menu-item">QPCR</a>
                 <a href="quiz-res-ensyme.html" class="menu-item">Ensyme</a>
             </div>
