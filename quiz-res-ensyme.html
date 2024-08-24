@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>משחק שאלות על qPCR</title>
+    <title>משחק שאלות על אנזימי הגבלה</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <!-- https://www.kirilv.com/canvas-confetti/ -->
     <style>
         :root {
-    --background-dark: #85694f;
-    --teal-dark: #8a9966;
-    --peach: #f8f4e1;
-    --peach-dark: #cad7ab;
-    --teal-light: #f8f4e1;
+    --back-main: #023535;
+    --back-quest: #8a9966;
+    --back-buttons: #f8f4e1;
+    --back-buttons-hover: #cad7ab;
+    --main-font-color: #f8f4e1;
     --progress-fill: #f8f4e1;
     --success-color: #8a9966;
-    --error-color: #fff29d;
+    --error-color: #ff9d2b;
     --question-color: #f1faee;
-    --answer-color: #8a9966;
+    --answer-color: #023535;
         }
-
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -26,32 +26,32 @@
             margin: 0 auto;
             padding: 20px;
             text-align: center;
-            background-color: var(--background-dark);
-            color: var(--teal-light);
+            background-color: var(--back-main);
+            color: var(--main-font-color);
             transition: all 0.3s ease;
-            zoom: 0.8;
+            /* zoom: 0.8; */
         }
         .question {
-            background-color: var(--teal-dark);
+            background-color: var(--back-quest);
             padding: 20px;
             border-radius: 15px;
             margin-bottom: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            color: var(--question-color); /* Set question text color */
+            color: var(--question-color);
         }
         button {
             padding: 12px 24px;
             font-size: 16px;
             cursor: pointer;
-            background-color: var(--peach);
-            color: var(--background-dark);
+            background-color: var(--back-buttons);
+            color: var(--back-main);
             border: none;
             border-radius: 25px;
             transition: all 0.3s ease;
             margin-top: 10px;
         }
         button:hover {
-            background-color: var(--peach-dark);
+            background-color: var(--back-buttons-hover);
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
@@ -62,37 +62,37 @@
         }
         #progressBar {
             width: 100%;
-            background-color: var(--peach);
+            background-color: var(--back-buttons);
             border-radius: 15px;
             margin-bottom: 10px;
             overflow: hidden;
         }
         #progressBar div {
-    width: 0;
-    height: 20px;
-    background-color: var(--teal-dark);
-    transition: width 0.5s ease-in-out;
-}
+            width: 0;
+            height: 20px;
+            background-color: var(--back-quest);
+            transition: width 0.5s ease-in-out;
+        }
         h1, h2 {
-            color: var(--teal-light);
+            color: var(--main-font-color);
         }
         label {
             display: block;
             margin: 10px 0;
             padding: 10px;
-            background-color: var(--peach);
+            background-color: var(--back-buttons);
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
-            color: var(--answer-color); /* Set answer text color */
+            color: var(--answer-color);
         }
         input[type="radio"] {
             display: none;
         }
-.selected {
-    background-color: var(--background-dark);
-    color: var(--peach);
-}
+        .selected {
+            background-color: var(--back-main);
+            color: var(--back-buttons);
+        }
 
         /* Custom alert box styles */
         #customAlert {
@@ -101,8 +101,8 @@
             top: 30%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: var(--background-dark);
-            border: 2px solid var(--teal-dark);
+            background-color: var(--back-main);
+            border: 2px solid var(--back-quest);
             padding: 20px;
             border-radius: 10px;
             text-align: center;
@@ -111,8 +111,8 @@
         }
 
         #customAlert button {
-            background-color: var(--peach);
-            color: var(--background-dark);
+            background-color: var(--back-buttons);
+            color: var(--back-main);
             border: none;
             border-radius: 5px;
             padding: 10px 20px;
@@ -121,7 +121,7 @@
         }
 
         #customAlert button:hover {
-            background-color: var(--peach-dark);
+            background-color: var(--back-buttons-hover);
         }
 
         /* Overlay to dim the background */
@@ -140,11 +140,11 @@
 </head>
 <body>
     <div id="startPage">
-    <h1>ברוכים הבאים למשחק שאלות על qPCR</h1>
-    <button onclick="startQuiz()">התחל משחק</button>
-</div>
-<div id="quizContainer" style="display:none;">
-    <h1>משחק שאלות על qPCR</h1>
+        <h1>ברוכים הבאים למשחק שאלות על אנזימי הגבלה</h1>
+        <button onclick="startQuiz()">התחל משחק</button>
+    </div>
+    <div id="quizContainer" style="display:none;">
+        <h1>משחק שאלות על אנזימי הגבלה</h1>
         <div id="progressBar"><div></div></div>
         <div id="questionContainer"></div>
         <button id="nextButton" onclick="nextQuestion()" style="display:none;">לשאלה הבאה</button>
@@ -160,84 +160,84 @@
 
     <script>
     const questions = [
-    {
-        question: "מהו ההבדל העיקרי בין qPCR לבין PCR מסורתי?",
-        answers: ["qPCR איטי יותר אך מדויק יותר", "qPCR מאפשר מעקב בזמן אמת אחר הגברת DNA", "qPCR אינו דורש אנזימים", "qPCR משתמש ב-RNA במקום DNA"],
-        correct: 1
-    },
-    {
-        question: "מה המשמעות של qPCR?",
-        answers: ["Quick Polymerase Chain Reaction", "Quantitative Polymerase Chain Reaction", "Qualitative Polymerase Chain Reaction", "Quasi Polymerase Chain Reaction"],
-        correct: 1
-    },
-    {
-        question: "מהו יישום נפוץ של qPCR?",
-        answers: ["זיהוי מוטציות ב-DNA", "מדידת רמות ביטוי גנים", "ריצוף גנומים שלמים", "יצירת טביעות אצבע גנטיות"],
-        correct: 1
-    },
-    {
-        question: "מהו תפקידו של הצבע SYBR Green ב-qPCR?",
-        answers: ["מסמן את תחילת התגובה", "מעכב את התגובה", "נקשר ל-DNA דו-גדילי וזורח", "מגביר את ה-DNA"],
-        correct: 2
-    },
-    {
-        question: "כיצד TaqMan שונה מ-SYBR Green ב-qPCR?",
-        answers: ["TaqMan משתמש בגלאי ספציפי לרצף ה-DNA המטרה", "TaqMan עובד רק עם RNA", "TaqMan דורש יותר מחזורים", "TaqMan משמש לאחר תגובת ה-PCR"],
-        correct: 0
-    },
-    {
-        question: "מהו ערך Ct ב-qPCR?",
-        answers: ["סף המחזור שבו הפלואורסצנציה עוברת את רמת הרקע", "הריכוז ההתחלתי של ה-DNA המטרה", "מספר המחזורים שהושלמו בתגובה", "הזמן שלוקח להגיע לפלואורסצנציה מרבית"],
-        correct: 0
-    },
-    {
-        question: "מדוע משתמשים באנזים מתעתק במהופך ב-qPCR?",
-        answers: ["להגביר DNA", "להמיר RNA ל-cDNA", "לעכב תגובות לא רצויות", "לפרק RNA"],
-        correct: 1
-    },
-    {
-        question: "מהי המשמעות של שימוש בגן מנרמל בניסויי qPCR?",
-        answers: ["מאיץ את התגובה", "מנרמל נתונים כדי לחשב שינויים בכמות הדגימה ולהבטיח כימות מדויק", "מגביר את הפלואורסצנציה", "מזהה מזהמים"],
-        correct: 1
-    },
-    {
-        question: "איזה שלב ב-qPCR כולל הפרדת גדילי ה-DNA?",
-        answers: ["דנטורציה", "היצמדות", "הארכה", "זיהוי פלואורסצנטי"],
-        correct: 0
-    },
-    {
-        question: "למה מתייחס המונח 'בזמן אמת' ב-qPCR?",
-        answers: ["התגובה מתבצעת מידית", "הגברת ה-DNA ניתנת למעקב במהלך התגובה", "התוצאות מנותחות ידנית", "כל התהליך ממוכן"],
-        correct: 1
-    },
-    {
-        question: "איזה מהבאים אינו שימוש טיפוסי ב-qPCR?",
-        answers: ["ריצוף גנום שלם", "כימות ביטוי גנים", "זיהוי פתוגנים", "מדידת וריאציות במספר העותקים של DNA"],
-        correct: 0
-    },
-    {
-        question: "מה קורה אם לא נמדדת פלואורסצנציה ב-qPCR?",
-        answers: ["ה-DNA הוגבר במלואו", "ייתכן שהרצף המטרה אינו נוכח, או שהתוצאה נכשלה", "התגובה הושלמה", "הדגימה מכילה מעכבים"],
-        correct: 1
-    },
-    {
-        question: "מה מציין ערך Ct מוקדם יותר ב-qPCR?",
-        answers: ["ריכוז התחלתי גבוה יותר של ה-DNA המטרה", "ריכוז התחלתי נמוך יותר של ה-DNA המטרה", "תגובה איטית יותר", "הגברה פחות יעילה"],
-        correct: 0
-    },
-    {
-        question: "מהי מטרת שלב ההיצמדות ב-qPCR?",
-        answers: ["לקשור את הצבע הפלואורסצנטי ל-DNA", "להפריד את גדילי ה-DNA", "להשלים את סינתזת ה-DNA", "להצמיד תחלים לרצף ה-DNA המטרה"],
-        correct: 3
-    },
-    {
-        question: "מהו תפקידו של האנזים Taq פולימראז ב-qPCR?",
-        answers: ["להפריד את גדילי ה-DNA", "לסנתז גדילי DNA חדשים", "לפרק RNA", "להקשר ל-DNA דו-גדילי"],
-        correct: 1
-    }
-];
+        {
+            question: "מהם אנזימי הגבלה?",
+            answers: ["חלבונים המפרקים חומצות אמינו", "אנזימים החותכים את ה-DNA באתרים ספציפיים", "חלבונים המשכפלים DNA", "אנזימים המסנתזים RNA"],
+            correct: 1
+        },
+        {
+            question: "מהי תופעת ההגבלה?",
+            answers: ["הגבלת יכולת החיידק לשכפל DNA", "הגבלה על ריבוי נגיפים באמצעות אנזימי הגבלה", "הגבלה על יצירת חלבונים בחיידקים", "הגבלה על תהליך השכפול הגנטי"],
+            correct: 1
+        },
+        {
+            question: "כיצד חיידקים מגנים על אתרי ההגבלה שלהם?",
+            answers: ["על ידי הוספת קבוצות מתיל לאתרים", "באמצעות פירוק ה-DNA של הנגיף", "על ידי סינתזת חלבונים מגנים", "על ידי יצירת חומצות שומן מיוחדות"],
+            correct: 0
+        },
+        {
+            question: "מהם קצוות דביקים?",
+            answers: ["קצוות DNA המתחברים בצורה חלקה", "קצוות DNA חד גדיליים בעלי רצפים משלימים", "קצוות DNA שנחתכו באופן ישר", "קצוות RNA המסונתזים ל-DNA"],
+            correct: 1
+        },
+        {
+            question: "מה ההבדל בין חיתוך ישר לחיתוך מדורג ב-DNA?",
+            answers: ["חיתוך ישר יוצר קצוות דביקים, מדורג יוצר קצוות חלקים", "חיתוך ישר יוצר קצוות חלקים, מדורג יוצר קצוות דביקים", "אין הבדל", "חיתוך ישר הוא חלק ממערכת תיקון ה-DNA"],
+            correct: 1
+        },
+        {
+            question: "כיצד משתמשים באנזימי הגבלה בהנדסה גנטית?",
+            answers: ["לחיתוך DNA במקטעים ספציפיים ולחיבורם מחדש", "להגברת מהירות השכפול", "לזיהוי מוטציות גנטיות", "להגבלת גדילת חיידקים במעבדה"],
+            correct: 0
+        },
+        {
+            question: "מה קורה כאשר אנזים הגבלה חותך את ה-DNA?",
+            answers: ["ה-DNA מתפצל לשני חלקים", "ה-DNA מתאחה מחדש מיד", "ה-DNA נשאר רציף", "ה-DNA משכפל את עצמו"],
+            correct: 0
+        },
+        {
+            question: "מהו אתר ההכרה של אנזים הגבלה?",
+            answers: ["רצף ספציפי של נוקלאוטידים בו האנזים פועל", "אתר בגנום בו מתרחשת הכפלת DNA", "רצף המתחבר לאנזים RNA פולימראז", "חלק מהגנום בו מתבצע התעתוק"],
+            correct: 0
+        },
+        {
+            question: "מהו תהליך הליגציה?",
+            answers: ["חיבור מקטעי DNA שנחתכו", "פירוק DNA למקטעים", "שכפול DNA", "תיקון DNA פגוע"],
+            correct: 0
+        },
+        {
+            question: "מהי מפת הגבלה?",
+            answers: ["תיאור מיקומם של אתרי ההגבלה על מקטע DNA", "מפה המציגה את אתרי הכפלת ה-DNA", "תרשים של תהליכי תרגום חלבונים", "מפה המציגה את רצף הנוקלאוטידים בגנום"],
+            correct: 0
+        },
+        {
+            question: "כיצד ניתן לייצר DNA רקומביננטי?",
+            answers: ["על ידי חיבור מקטעי DNA שונים לאחר חיתוך", "על ידי שכפול רצפים גנטיים", "על ידי תרגום חלבונים ב-DNA", "על ידי מוטציות יזומות"],
+            correct: 0
+        },
+        {
+            question: "מהו הפולינדרום ב-DNA?",
+            answers: ["רצף נוקלאוטידים הנקרא באותו אופן משני הכיוונים", "רצף חלבוני חוזר ב-DNA", "רצף RNA המתחבר ל-DNA", "רצף גנטי ייחודי המשמש לשכפול"],
+            correct: 0
+        },
+        {
+            question: "מה היתרון בקצוות דביקים לאחר חיתוך DNA?",
+            answers: ["הם מאפשרים חיבור קל יותר למקטעי DNA אחרים", "הם מונעים את החיבור מחדש של ה-DNA", "הם מאפשרים את שיכפול ה-DNA", "הם עמידים לפעילות אנזימים אחרים"],
+            correct: 0
+        },
+        {
+            question: "כיצד ניתן להפריד מקטעי DNA לאחר חיתוך?",
+            answers: ["באמצעות אלקטרופורזה בג'ל", "על ידי סינתזת חלבונים", "באמצעות סנתוז RNA", "על ידי חיתוך נוסף"],
+            correct: 0
+        },
+        {
+            question: "מהו תהליך השימוש באנזימי הגבלה במעבדה?",
+            answers: ["חיתוך DNA, הפרדת מקטעים באמצעות ג'ל, ובניית מפת הגבלה", "חיתוך DNA ושימוש ב-PCR", "פירוק DNA והפקת חלבונים", "חיתוך DNA ומידת המקטעים"],
+            correct: 0
+        }
+    ];
 
-    
+   
 
 let currentQuestion = 0;
     let score = 0;
