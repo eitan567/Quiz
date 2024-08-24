@@ -1,8 +1,21 @@
-:root {
+/* :root {
     --background-dark: #85694f;
     --teal-dark: #8a9966;
     --peach: #f8f4e1;
     --peach-dark: #cad7ab;
+    --teal-light: #f8f4e1;
+    --progress-fill: #f8f4e1;
+    --success-color: #8a9966;
+    --error-color: #482d36;
+    --question-color: #f1faee;
+    --answer-color: #8a9966;
+} */
+
+:root {
+    --background-dark: #4e4135;
+    --teal-dark: #6d745a;
+    --peach: #fffced;
+    --peach-dark: #a2a893;
     --teal-light: #f8f4e1;
     --progress-fill: #f8f4e1;
     --success-color: #8a9966;
@@ -42,6 +55,12 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     color: var(--question-color); /* Set question text color */
 }
+
+.question p{
+    font-size: 24px;
+    font-weight: bolder;
+}
+
 button {
     padding: 12px 24px;
     font-size: 16px;
@@ -88,6 +107,7 @@ label {
     cursor: pointer;
     transition: all 0.3s ease;
     color: var(--answer-color); /* Set answer text color */
+    font-weight: bold;
 }
 input[type="radio"] {
     display: none;

@@ -12,7 +12,7 @@
             answered = false; // Reset answered state
             const questionContainer = document.getElementById('questionContainer');
             const question = questions[currentQuestion];
-            let html = `<div class="question"><h2>שאלה ${currentQuestion + 1} מתוך ${questions.length}</h2><p>${question.question}</p>`;
+            let html = `<div class="question"><h3>שאלה ${currentQuestion + 1} מתוך ${questions.length}</h3><p>${question.question}</p>`;
             for (let i = 0; i < question.answers.length; i++) {
                 html += `<label><input type="radio" name="answer" value="${i}" onclick="selectAnswer(this)"> ${question.answers[i]}</label>`;
             }
