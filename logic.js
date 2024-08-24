@@ -91,3 +91,5 @@ let questions = questions_ner;
             document.getElementById('nextButton').style.display = 'none';
             document.getElementById('feedback').style.display = 'none'; // Hide feedback on the last question
         }   
+
+        startQuiz()
