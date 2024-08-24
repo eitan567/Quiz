@@ -1,6 +1,7 @@
  let currentQuestion = 0;
         let score = 0;
         let answered = false;
+		let questions = questions_ner;
 
         function updateProgressBar() {
             let progress = ((currentQuestion + 1) / questions.length) * 100; // Ensure progress bar is full at the end
