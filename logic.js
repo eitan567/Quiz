@@ -1,8 +1,7 @@
-let questions = questions_ner;
 		let currentQuestion = 0;
+        let questions = questions_ner;
         let score = 0;
         let answered = false;
-
         function updateProgressBar() {
             let progress = ((currentQuestion + 1) / questions.length) * 100; // Ensure progress bar is full at the end
             let progressBar = document.querySelector("#progressBar div");
@@ -24,9 +23,7 @@ let questions = questions_ner;
             updateProgressBar();
         }
 
-        function startQuiz() {
-            // document.getElementById('startPage').style.display = 'none';
-            // document.getElementById('quizContainer').style.display = 'block';
+        function startQuiz() {            
             displayQuestion();
         }
 
@@ -92,4 +89,4 @@ let questions = questions_ner;
             document.getElementById('feedback').style.display = 'none'; // Hide feedback on the last question
         }   
 
-        startQuiz();
+        
